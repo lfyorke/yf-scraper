@@ -1,7 +1,6 @@
 import bs4
 import pandas as pd 
 import requests
-import urllib.request
 
 URL = 'https://uk.finance.yahoo.com/currencies'
 COLUMNS = ['cy-pair', 'rate']
