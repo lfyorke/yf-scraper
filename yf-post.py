@@ -1,10 +1,11 @@
 import bs4
 import pandas as pd 
 import requests
+from datetime import datetime
 
 URL = 'https://widget-yahoo.ofx.com/resources/1500309750700/data/localizations/USA.json'
 POST_URL = 'https://adsynth-ofx-quotewidget-prod.herokuapp.com/api/1'
-COLUMNS = ['cy-pair', 'rate']
+COLUMNS = ['cy-pair', 'rate', 'date']
 
 def get_webpage(url):
     return requests.get(url).json()
@@ -26,7 +27,7 @@ def post_loop(currencies):
             data = {"method": "spotRateHistory", "data": {"base": base, "term": term, "period": "day"}}
             f = requests.post(POST_URL, json=data).json()
             try:
-                results.append([base + term, f['data']['CurrentInterbankRate']])
+                results.append([base + term, f['data']['CurrentInterbankRate']], '01/05/2017')
             except:
                 pass
     return pd.DataFrame(results, columns=COLUMNS)
