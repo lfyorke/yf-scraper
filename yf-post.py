@@ -27,7 +27,7 @@ def post_loop(currencies):
             data = {"method": "spotRateHistory", "data": {"base": base, "term": term, "period": "day"}}
             f = requests.post(POST_URL, json=data).json()
             try:
-                results.append([base + term, f['data']['CurrentInterbankRate']], '01/05/2017')
+                results.append([base + term, f['data']['CurrentInterbankRate'], datetime.now()])
             except:
                 pass
     return pd.DataFrame(results, columns=COLUMNS)
@@ -38,3 +38,4 @@ if __name__ == "__main__":
     currencies = get_list_of_cys(webpage)
     filtered = filter_cys(currencies)
     data = post_loop(filtered)
+    print(data)

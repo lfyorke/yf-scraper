@@ -20,4 +20,4 @@ def scrape(webpage):
 if __name__ == "__main__":
     page = get_webpage(URL)
     data = scrape(page)
-    print(data)
+    print(data.head())
